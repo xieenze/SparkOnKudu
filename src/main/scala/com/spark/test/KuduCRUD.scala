@@ -91,7 +91,7 @@ object test {
     val customersRDD = sc.parallelize(customers)
 
     // Now, using reflection, this RDD can easily be converted to a DataFrame
-    // Ensure to do the :
+    // Ensure to do the 
     //     import sqlContext.implicits._
     // above to have the toDF() function available to you
     val customersDF = customersRDD.toDF()
@@ -104,7 +104,6 @@ object test {
 
     ///-------------------------------------------------------------------------------------
     /// 插入数据
-
     // 1. 指定kudu表
     kuduTableName = "spark_kudu_tbl"
 
