@@ -16,9 +16,9 @@ Apache Kudu官网：http://kudu.apache.org/
 
 > ### 1 kudu的配置
 > * `先决条件`
-    - 1 一台或多台master机器（奇数）
-    - 2 一台或者多台tserver机器（123。。。）
-    - 3 设置时间同步ntp
+    - 一台或多台master机器（奇数）
+    - 一台或者多台tserver机器（123。。。）
+    - 设置时间同步ntp
 
 
      
