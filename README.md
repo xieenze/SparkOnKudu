@@ -70,3 +70,4 @@ Apache Kudu官网：http://kudu.apache.org/
  - 1 实现增删改查，通过KuduContext
  - 2 实现修改表结构，通过KuduClient
 暂时先写到这里，现成的代码看https://github.com/xieenze/SparkOnKudu/blob/master/src/main/scala/com/spark/test/KuduCRUD.scala
+ 
