@@ -62,9 +62,9 @@ Apache Kudu官网：http://kudu.apache.org/ 建议参考官网的配置，结合
   master监控：http://masterURL:8051(主要看这个)  
   tserver监控：http://tserverURL:8050   
   Kudu主进程在8051端口上为其Web界面提供服务。该界面暴露了几个页面，其中包含有关群集状态的信息：  
-   - slave节点服务器列表，其主机名和上次心跳时间。  
-   - table列表，包括每个表的表结构和分片位置信息。  
-   - 在kudu master服务器上执行命令：`kudu table list master` 可以查看有哪些表  
+     - slave节点服务器列表，其主机名和上次心跳时间。  
+     - table列表，包括每个表的表结构和分片位置信息。  
+     - 在kudu master服务器上执行命令：`kudu table list master` 可以查看有哪些表  
 
 
 ----------
