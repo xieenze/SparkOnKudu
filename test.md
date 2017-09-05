@@ -9,7 +9,7 @@ Spark On Kudu 案例吐血总结
 > **Note:**
 >  1. kudu的配置
 >  2. spark结合kudu开发应用程序
->  pre：本案例使用的服务器是centos7，一共两台机器，一台机器作为master，另一台机器作为tserver。
+>  pre：本案例使用的服务器是***centos7***，一共***两台***机器，一台机器作为master和tserver，另一台机器作为tserver。
 
 
 ----------
@@ -43,12 +43,34 @@ Apache Kudu官网：http://kudu.apache.org/ 建议参考官网的配置，结合
        - `sudo rpm -ivh kudu-1.4.0+cdh5.12.0+0-1.cdh5.12.0.p0.24.el7.x86_64.rpm` 
        - `sudo rpm -ivh kudu-tserver/master-1.4.0+cdh5.12.0+0-1.cdh5.12.0.p0.24.el7.x86_64.rpm`
   5. 修改master和tserver上的配置文件保证集群配置成功
-    - 在master机器上执行 `vim /etc/default/kudu-master` 
+    - 在master机器上执行 `vim /etc/default/kudu-master`  
     将  
-    `export FLAGS_rpc_bind_addresses=0.0.0.0:7051` 
+    `export FLAGS_rpc_bind_addresses=0.0.0.0:7051`  
     修改为   
-    `export FLAGS_rpc_bind_addresses=master的ip地址:7051`
+    `export FLAGS_rpc_bind_addresses=master的ip地址:7051`  
 	- 分别在tserver机器上执行  
-	 `vim /etc/kudu/conf/tserver.gflagfile` 
+	 `vim /etc/kudu/conf/tserver.gflagfile`  
 	 在末尾增加  
-	 `--tserver_master_addrs=master的ip地址:7051`
+	 `--tserver_master_addrs=master的ip地址:7051`  
+  - 启动master和tserver  
+  `sudo service kudu-master start`  
+  `sudo service kudu-tserver start`  
+  - 停止master和tserver  
+  `sudo service kudu-master stop`  
+  `sudo service kudu-tserver stop`
+  6. 访问web界面监控kudu集群情况  
+  master监控：http://masterURL:8051(主要看这个)  
+  tserver监控：http://tserverURL:8050   
+  Kudu主进程在8051端口上为其Web界面提供服务。该界面暴露了几个页面，其中包含有关群集状态的信息：  
+   - slave节点服务器列表，其主机名和上次心跳时间。  
+   - table列表，包括每个表的表结构和分片位置信息。  
+   - 在kudu master服务器上执行命令：`kudu table list master` 可以查看有哪些表  
+
+
+----------
+
+#### <i class="icon-file"></i> 2. spark + kudu 应用程序开发
+1. 实现增删改查，通过KuduContext的API
+2. 实现修改表结构，如增加，删除，重命名列，通过KuduClient的API  
+暂时先写到这里，现成的代码看这个例子  
+https://github.com/xieenze/SparkOnKudu/blob/master/src/main/scala/com/spark/test/KuduCRUD.scala  
