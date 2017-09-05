@@ -19,6 +19,7 @@ Apache Kudu官网：http://kudu.apache.org/
  - 一台或多台master机器（奇数）
  -  一台或者多台tserver机器（123。。。）
  - 设置时间同步ntp
+>
 
      
 
