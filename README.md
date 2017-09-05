@@ -13,51 +13,53 @@
 
 Apache Kudu官网：http://kudu.apache.org/
 建议参考官网的配置，结合我的一起看，我也是从官网总结的，不过官网有些地方写的很不清楚
+
 > ### 1 kudu的配置
 > * `先决条件`
-     *  一台或多台master机器（奇数）
-     *  一台或者多台tserver机器（123。。。）
-     *  设置时间同步ntp
+ 1. 一台或多台master机器（奇数）
+ 2.  一台或者多台tserver机器（123。。。）
+ 3. 设置时间同步ntp
+
      
 
 > * `在centos上安装kudu`
-     *  下载kudu的所有rpm安装包，一共6个 http://archive.cloudera.com/kudu/redhat/7/x86_64/kudu/5/RPMS/x86_64/
-     *  手动安装 ```sudo rpm -ivh xxx.rpm```
-     *  注意：
-    *  1 master机器上不需要安装tserver的rpm
-    *   2 tserver机器上不需要安装master的rpm
-    *   3 一台机可以既是master又是tserver，也就是两个都装
-    *   4 如果出现安装失败的情况提前安装`cyrus-sasl-plain`，`lsb`插件
-     *  安装包要按照如下顺序安装
-    *  `sudo rpm -ivh kudu-debuginfo-1.4.0+cdh5.12.0+0-1.cdh5.12.0.p0.24.el7.x86_64.rpm`
-	*  `sudo rpm -ivh kudu-client0-1.4.0+cdh5.12.0+0-1.cdh5.12.0.p0.24.el7.x86_64.rpm` 
-	*  `sudo rpm -ivh kudu-client-devel-1.4.0+cdh5.12.0+0-1.cdh5.12.0.p0.24.el7.x86_64.rpm`
-	*  `sudo rpm -ivh kudu-1.4.0+cdh5.12.0+0-1.cdh5.12.0.p0.24.el7.x86_64.rpm `
-	*  `sudo rpm -ivh kudu-tserver/master-1.4.0+cdh5.12.0+0-1.cdh5.12.0.p0.24.el7.x86_64.rpm` 
-	 *  修改master和tserver上的配置文件保证集群配置成功
-	*  在master机器上执行
-	`vim /etc/default/kudu-master` 
+    1. 下载kudu的所有rpm安装包，一共6个 http://archive.cloudera.com/kudu/redhat/7/x86_64/kudu/5/RPMS/x86_64/
+    2. 手动安装 ```sudo rpm -ivh xxx.rpm```
+    3. 注意：
+     - 1 master机器上不需要安装tserver的rpm
+     - 2 tserver机器上不需要安装master的rpm
+     - 3 一台机可以既是master又是tserver，也就是两个都装
+     - 4 如果出现安装失败的情况提前安装`cyrus-sasl-plain`，`lsb`插件
+    4. 安装包要按照如下顺序安装
+     - 1 `sudo rpm -ivh kudu-debuginfo-1.4.0+cdh5.12.0+0-1.cdh5.12.0.p0.24.el7.x86_64.rpm`
+     - 2 `sudo rpm -ivh kudu-client0-1.4.0+cdh5.12.0+0-1.cdh5.12.0.p0.24.el7.x86_64.rpm` 
+     - 3 `sudo rpm -ivh kudu-client-devel-1.4.0+cdh5.12.0+0-1.cdh5.12.0.p0.24.el7.x86_64.rpm`
+     - 4 `sudo rpm -ivh kudu-1.4.0+cdh5.12.0+0-1.cdh5.12.0.p0.24.el7.x86_64.rpm `
+     - 5 `sudo rpm -ivh kudu-tserver/master-1.4.0+cdh5.12.0+0-1.cdh5.12.0.p0.24.el7.x86_64.rpm` 
+    5. 修改master和tserver上的配置文件保证集群配置成功
+    - 在master机器上执行
+    	`vim /etc/default/kudu-master` 
 	将
-	`export FLAGS_rpc_bind_addresses=0.0.0.0:7051`
+    	`export FLAGS_rpc_bind_addresses=0.0.0.0:7051`
 	修改为
-	`export FLAGS_rpc_bind_addresses=master的ip地址:7051`
-    *  分别在tserver机器上执行
-    `vim /etc/kudu/conf/tserver.gflagfile`
+    	`export FLAGS_rpc_bind_addresses=master的ip地址:7051`
+    - 分别在tserver机器上执行
+        `vim /etc/kudu/conf/tserver.gflagfile`
     在末尾增加
-    `--tserver_master_addrs=master的ip地址:7051`
-	 *  启动master和tserver
-	` $ sudo service kudu-master start`
-    `$ sudo service kudu-tserver start`
-	 *  停止master和tserver
-	` $ sudo service kudu-master stop`
-    `$ sudo service kudu-tserver stop`  
-	 *  访问web界面监控kudu集群情况
-	http://masterURL:8051(主要看这个)
-	http://tserverURL:8050
-	Kudu主进程在8051端口上为其Web界面提供服务。该界面暴露了几个页面，其中包含有关群集状态的信息：
-	slave节点服务器列表，其主机名和上次心跳时间。
-	table列表，包括每个表的表结构和分片位置信息。
-	在kudu master服务器上执行命令：`kudu table list master` 可以查看有哪些表
+        `--tserver_master_addrs=master的ip地址:7051`
+    - 启动master和tserver
+    	` $ sudo service kudu-master start`
+        `$ sudo service kudu-tserver start`
+    - 停止master和tserver
+    	` $ sudo service kudu-master stop`
+        `$ sudo service kudu-tserver stop`  
+    6. 访问web界面监控kudu集群情况
+	http://masterURL:8051(主要看这个)  
+	http://tserverURL:8050  
+	Kudu主进程在8051端口上为其Web界面提供服务。该界面暴露了几个页面，其中包含有关群集状态的信息：  
+	slave节点服务器列表，其主机名和上次心跳时间。  
+	table列表，包括每个表的表结构和分片位置信息。  
+	在kudu master服务器上执行命令：`kudu table list master` 可以查看有哪些表  
 
 	
 ------
