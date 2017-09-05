@@ -1,5 +1,5 @@
 # SparkOnKudu  
-使用sparkSQL+kudu的案例  
+使用spark+kudu的案例  
 不要问我是谁，我叫雷锋  
 1 实现增删改查，通过KuduContext  
 2 实现修改表结构，通过KuduClient  
