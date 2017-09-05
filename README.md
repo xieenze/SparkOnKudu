@@ -22,14 +22,15 @@ Apache Kudu官网：http://kudu.apache.org/
 
      
 
+
 > * `在centos上安装kudu`
-    1. 下载kudu的所有rpm安装包，一共6个 http://archive.cloudera.com/kudu/redhat/7/x86_64/kudu/5/RPMS/x86_64/
-    2. 手动安装 ```sudo rpm -ivh xxx.rpm```
-    3. 注意：
-     - 1 master机器上不需要安装tserver的rpm
-     - 2 tserver机器上不需要安装master的rpm
-     - 3 一台机可以既是master又是tserver，也就是两个都装
-     - 4 如果出现安装失败的情况提前安装`cyrus-sasl-plain`，`lsb`插件
+ 1. 下载kudu的所有rpm安装包，一共6个 http://archive.cloudera.com/kudu/redhat/7/x86_64/kudu/5/RPMS/x86_64/
+ 2. 手动安装 ```sudo rpm -ivh xxx.rpm```
+ 3. 注意：
+ - 1 master机器上不需要安装tserver的rpm
+ - 2 tserver机器上不需要安装master的rpm
+ - 3 一台机可以既是master又是tserver，也就是两个都装
+ - 4 如果出现安装失败的情况提前安装`cyrus-sasl-plain`，`lsb`插件
     4. 安装包要按照如下顺序安装
      - 1 `sudo rpm -ivh kudu-debuginfo-1.4.0+cdh5.12.0+0-1.cdh5.12.0.p0.24.el7.x86_64.rpm`
      - 2 `sudo rpm -ivh kudu-client0-1.4.0+cdh5.12.0+0-1.cdh5.12.0.p0.24.el7.x86_64.rpm` 
