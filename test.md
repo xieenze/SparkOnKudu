@@ -1,3 +1,4 @@
+
 Spark On Kudu 案例吐血总结
 -------------
 
@@ -43,11 +44,11 @@ Apache Kudu官网：http://kudu.apache.org/ 建议参考官网的配置，结合
        - `sudo rpm -ivh kudu-tserver/master-1.4.0+cdh5.12.0+0-1.cdh5.12.0.p0.24.el7.x86_64.rpm`
   5. 修改master和tserver上的配置文件保证集群配置成功
     - 在master机器上执行 `vim /etc/default/kudu-master` 
-    将 
+    将  
     `export FLAGS_rpc_bind_addresses=0.0.0.0:7051` 
-    修改为 
+    修改为   
     `export FLAGS_rpc_bind_addresses=master的ip地址:7051`
-	- 分别在tserver机器上执行 
+	- 分别在tserver机器上执行  
 	 `vim /etc/kudu/conf/tserver.gflagfile` 
-	 在末尾增加 
+	 在末尾增加  
 	 `--tserver_master_addrs=master的ip地址:7051`
