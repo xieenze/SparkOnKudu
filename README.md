@@ -31,13 +31,13 @@ Apache Kudu官网：http://kudu.apache.org/
  - 2 tserver机器上不需要安装master的rpm
  - 3 一台机可以既是master又是tserver，也就是两个都装
  - 4 如果出现安装失败的情况提前安装`cyrus-sasl-plain`，`lsb`插件
-    4. 安装包要按照如下顺序安装
+ 4. 安装包要按照如下顺序安装
      - 1 `sudo rpm -ivh kudu-debuginfo-1.4.0+cdh5.12.0+0-1.cdh5.12.0.p0.24.el7.x86_64.rpm`
      - 2 `sudo rpm -ivh kudu-client0-1.4.0+cdh5.12.0+0-1.cdh5.12.0.p0.24.el7.x86_64.rpm` 
      - 3 `sudo rpm -ivh kudu-client-devel-1.4.0+cdh5.12.0+0-1.cdh5.12.0.p0.24.el7.x86_64.rpm`
      - 4 `sudo rpm -ivh kudu-1.4.0+cdh5.12.0+0-1.cdh5.12.0.p0.24.el7.x86_64.rpm `
      - 5 `sudo rpm -ivh kudu-tserver/master-1.4.0+cdh5.12.0+0-1.cdh5.12.0.p0.24.el7.x86_64.rpm` 
-    5. 修改master和tserver上的配置文件保证集群配置成功
+ 5. 修改master和tserver上的配置文件保证集群配置成功
     - 在master机器上执行
     	`vim /etc/default/kudu-master` 
 	将
@@ -54,7 +54,7 @@ Apache Kudu官网：http://kudu.apache.org/
     - 停止master和tserver
     	` $ sudo service kudu-master stop`
         `$ sudo service kudu-tserver stop`  
-    6. 访问web界面监控kudu集群情况
+ 6. 访问web界面监控kudu集群情况
 	http://masterURL:8051(主要看这个)  
 	http://tserverURL:8050  
 	Kudu主进程在8051端口上为其Web界面提供服务。该界面暴露了几个页面，其中包含有关群集状态的信息：  
