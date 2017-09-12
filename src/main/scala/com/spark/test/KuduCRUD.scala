@@ -74,7 +74,7 @@ object kuduCRUD_demo {
     //表的复制和分区选项
     val kuduTableOptions = new CreateTableOptions()
     kuduTableOptions.
-      setRangePartitionColumns(List("name").asJava).//暂时不明白干嘛的
+      setRangePartitionColumns(List("name").asJava).//设置范围分区的列
       setNumReplicas(1).// 设置副本数量
       addHashPartitions(List("name").asJava,20)//设置分区 数据分到几台机器上
     //4 创建表
