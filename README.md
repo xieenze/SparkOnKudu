@@ -9,7 +9,7 @@ Spark On Kudu 案例吐血总结
 > **Note:**
 >  1. kudu的配置
 >  2. spark结合kudu开发应用程序
->  pre：本案例使用的服务器是 ***centos7*** ，一共 ***两台*** 机器，一台机器作为master和tserver，另一台机器作为tserver。
+>  pre：本案例使用的服务器是 ***centos7*** ，一共 ***五台*** 机器，一台机器作为master和tserver，另一台机器作为tserver。
 
 
 ----------
